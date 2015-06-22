@@ -78,7 +78,7 @@ $(document).ready( function() {
             if time is false-ey then display message indefinitely
          */
         var elt = $('#message');
-        elt.text(text);
+        elt.find('> p').text(text);
         if (time === 0) {
             if (!elt.hasClass('invisible')) {
                 elt.addClass('invisible');
@@ -139,5 +139,8 @@ $(document).ready( function() {
         displayQuestion();
         displayMessage("Quiz completed!", 2000);
     }
+
+    /* INITIALIZATION */
+    enterInitialState();
 
 });
