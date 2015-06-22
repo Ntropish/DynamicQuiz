@@ -34,7 +34,7 @@ function State(question, choices, correctAnswer) {
 //state object list is created here
 var states = [];
 for (var q in questions) {
-    states.append(new State(q.question, q.choices, q.correctAnswer));
+    states.push(new State(q.question, q.choices, q.correctAnswer));
 }
 
 $(document).ready( function() {
