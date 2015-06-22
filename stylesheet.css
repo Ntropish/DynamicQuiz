@@ -1,0 +1,4 @@
+.invisible {
+    transition: .2s;
+    display: block;
+}
