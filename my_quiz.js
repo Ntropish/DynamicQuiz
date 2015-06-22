@@ -44,20 +44,17 @@ $(document).ready( function() {
     //NOOB QUESTION: IS THIS THE BEST SCOPE FOR THIS?
     var messageTimeouts = [];
     function displayQuestion(questionText, choices) {
-        console.log(states)
-        console.log(questionText);
-        console.log(choices);
-        var elt = $('#question-disp');
-
-        if (! questionText) {
-            elt.find('#question-text').text('');
+        var textElt = $('#question-text');
+        var choicesElt = $('#choices');
+        textElt.empty();
+        if (questionText) {
+            textElt.text(questionText);
         } else {
-            elt.find('#question-text').text(questionText);
+
         }
-
-        if (! choices) {
-            elt.find('#choices').text('');
-        } else {
+        //Empty #choices and fill with new ones if given
+        choicesElt.empty();
+        if (choices) {
             for (var i = 0; i < choices.length; i++) {
                 /*
                 fill #choices unordered list with list elements and radio buttons
@@ -66,7 +63,7 @@ $(document).ready( function() {
                 */
                 var listElt = $('<li>' + choices[i] + '</li>');
                 listElt.append($('<input type="radio" name="choice" data-num="' + i + '"/>'));
-                elt.find('#choices').text();
+                choicesElt.append(listElt);
             }
         }
     }
