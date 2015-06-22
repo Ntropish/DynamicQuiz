@@ -1,0 +1,6 @@
+This repo is for my second version of a project given on http://javascriptissexy.com/how-to-learn-javascript-properly/ using the "Study Guide for Experienced Developers" track in the weeks 5 and 6 section
+
+The first version will be made available in the old_project directory here
+
+This new version is necessary to abstract event handlers from the DOM using some sort of states. Previously the handlers iterated directly on the DOM as the user progressed linearly through the quiz. These states will allow non-linear movement and inspection from outside states.
+
