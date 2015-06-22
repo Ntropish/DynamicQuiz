@@ -1,4 +1,65 @@
+* {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+#header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 15%;
+    width: 100%;
+}
+
+#sub-heading {
+    min-height: 10%;
+}
+
+#question-disp {
+    min-height: 250px;
+}
+
+#content {
+    position: absolute;
+    height: 80%;
+    width: 100%;
+    top: 20%;
+    left: 0px;
+}
+#message {
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+}
+
+#message>p {
+
+    font-size: 0.8em;
+}
+
+#buttons {
+    position: absolute;
+    bottom: 100px;
+    height: 10%;
+    width: 30%;
+}
+
+#forward {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+}
+#backward {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 .invisible {
     transition: .2s;
-    display: block;
+    opacity: 0;
+    display: none;
 }
