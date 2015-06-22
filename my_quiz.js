@@ -34,7 +34,7 @@ function State(question, choices, correctAnswer) {
 //state object list is created here
 var states = [];
 for (var q in questions) {
-    states.push(new State(q.question, q.choices, q.correctAnswer));
+    states.push(new State(questions[q].question, questions[q].choices, questions[q].correctAnswer));
 }
 
 $(document).ready( function() {
@@ -44,6 +44,9 @@ $(document).ready( function() {
     //NOOB QUESTION: IS THIS THE BEST SCOPE FOR THIS?
     var messageTimeouts = [];
     function displayQuestion(questionText, choices) {
+        console.log(states)
+        console.log(questionText);
+        console.log(choices);
         var elt = $('#question-disp');
 
         if (! questionText) {
@@ -133,8 +136,8 @@ $(document).ready( function() {
     //s refers to the index of the state starting from 0 and excluding the initial state
         if (states[s]) {
             displayQuestion(states[s].question, states[s].choices);
-
         }
+        //Handle button display for initial, last, general cases
         if (s === 0) {
             setAttrOrInvis($('#backward'));
             setAttrOrInvis($('#forward'), 'value', 'Next');
@@ -143,11 +146,9 @@ $(document).ready( function() {
             displayMessage("Final Question", 2000);
             setAttrOrInvis($('#backward'), 'value', 'Previous');
             setAttrOrInvis($('#forward'), 'value', 'Submit');
-            displayQuestion(states[s].question, states[s].choices);
         } else {
             setAttrOrInvis($('#backward'), 'value', 'Previous');
             setAttrOrInvis($('#forward'), 'value', 'Next');
-            displayQuestion(states[s].question, states[s].choices);
         }
     }
 
