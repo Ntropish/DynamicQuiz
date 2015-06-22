@@ -95,7 +95,7 @@ $(document).ready( function() {
         }
 
         if (time) {
-            messageTimeouts.append(setTimeout( function() {
+            messageTimeouts.push(setTimeout( function() {
                 if (!elt.hasClass('invisible')) {
                     elt.addClass('invisible');
                 }
@@ -153,6 +153,17 @@ $(document).ready( function() {
 
     //INITIALIZATION
     enterInitialState();
+
+    $('#forward').on('click', function() {
+        if (currentState === -1) {
+            displayMessage("Good Luck!", 2000);
+            enterState(++currentState);
+        }
+    });
+
+    $('#backward').on('click', function() {
+
+    });
 
 
 
