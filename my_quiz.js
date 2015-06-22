@@ -41,6 +41,7 @@ $(document).ready( function() {
     'use strict';
 
     //holds message timeout returns so they can be cancelled if new messages are displayed
+    //NOOB QUESTION: IS THIS THE BEST SCOPE FOR THIS?
     var messageTimeouts = [];
     function displayQuestion(questionText, choices) {
         var elt = $('#question-disp');
@@ -103,12 +104,22 @@ $(document).ready( function() {
 
     }
 
-    function setButton(button, text) {
-           if (text) {
-               button.text(text);
-           } else {
+    function setAttrOrInvis(elt, attr, val) {
+        /*
+        This is useful for setting button text/hiding them when not needed
 
-           }
+        Must be given a jquery object to do anything. If text attr is also
+        given, then that attribute is set to the given val. Otherwise the
+        object is given the invisible class
+         */
+        if (attr) {
+            if ( !elt.hasClass('invisible')) {
+                elt.removeClass('invisible')
+            }
+            elt.attr(attr, val);
+        } else if ( !elt.hasClass('invisible')) {
+            elt.addClass('invisible')
+        }
     }
 
     function enterInitialState() {
