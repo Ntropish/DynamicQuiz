@@ -152,6 +152,8 @@ $(document).ready( function() {
     function enterFinalState() {
         displayQuestion();
         displayMessage("Quiz completed!", 2000);
+        setAttrOrInvis($('#backward'));
+        setAttrOrInvis($('#forward'));
     }
 
     //INITIALIZATION
@@ -169,7 +171,13 @@ $(document).ready( function() {
     });
 
     $('#backward').on('click', function() {
-
+        if (currentState === -1) { //Shouldn't happen (button should be hidden)
+            displayMessage("How did this happen?!", 2000);
+        } else if (currentState === 0) { //Shouldn't happen again, don't change state if it does though
+            enterState(currentState);
+        } else { //Should be the only possible case
+            enterState(--currentState);
+        }
     });
 
 
