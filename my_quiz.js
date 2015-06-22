@@ -43,7 +43,28 @@ $(document).ready( function() {
     //holds message timeout returns so they can be cancelled if new messages are displayed
     var messageTimeouts = [];
     function displayQuestion(questionText, choices) {
+        var elt = $('#question-disp');
 
+        if (! questionText) {
+            elt.find('#question-text').text('');
+        } else {
+            elt.find('#question-text').text(questionText);
+        }
+
+        if (! choices) {
+            elt.find('#choices').text('');
+        } else {
+            for (var i = 0; i < choices.length; i++) {
+                /*
+                fill #choices unordered list with list elements and radio buttons
+                that store the choice number in the data-num attribute so we can
+                get the users answer
+                */
+                var listElt = $('<li>' + choices[i] + '</li>');
+                listElt.append($('<input type="radio" name="choice" data-num="' + i + '"/>'));
+                elt.find('#choices').text();
+            }
+        }
     }
 
     function displayMessage(text, time) {
