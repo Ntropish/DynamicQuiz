@@ -9,9 +9,9 @@ h1 {
 #header {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 10%;
     height: 15%;
-    width: 100%;
+    width: 90%;
 }
 
 #sub-heading {
@@ -25,9 +25,9 @@ h1 {
 #content {
     position: absolute;
     height: 80%;
-    width: 100%;
+    width: 90%;
     top: 20%;
-    left: 0px;
+    left: 10%;
 }
 #message {
     position: absolute;
@@ -49,13 +49,11 @@ h1 {
 
 #forward {
     position: absolute;
-    top: 0px;
-    left: 100px;
+    right: 0%;
 }
 #backward {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    left: 0%;
 }
 
 .invisible {
