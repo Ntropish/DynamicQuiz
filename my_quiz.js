@@ -40,16 +40,72 @@ for (var q in questions) {
 $(document).ready( function() {
     'use strict';
 
-    function enterInitialState() {
+    //holds message timeout returns so they can be cancelled if new messages are displayed
+    var messageTimeouts = [];
+    function displayQuestion(questionText, choices) {
 
     }
 
-    function enterState() {
+    function displayMessage(text, time) {
+        /*
+        Sets the visibility and text of the message div
 
+        Also takes a timeout argument:
+            if time = 0 then hide message immediately
+            if time > 0 then hide message after timeout ms
+            if time is false-ey then display message indefinitely
+         */
+        var elt = $('#message');
+        elt.text(text);
+        if (time === 0) {
+            if (!elt.hasClass('invisible')) {
+                elt.addClass('invisible');
+            }
+            return;
+        }
+
+        if (elt.hasClass('invisible')) {
+            elt.removeClass('invisible');
+        }
+        //make sure no old timeouts are active
+        for (var messageTimeout in messageTimeouts) {
+            clearTimeout(messageTimeouts[messageTimeout]);
+        }
+
+        if (time) {
+            messageTimeouts.append(setTimeout( function() {
+                if (!elt.hasClass('invisible')) {
+                    elt.addClass('invisible');
+                }
+            }, time));
+        }
+
+    }
+
+    function setButton(button, text) {
+           if (text) {
+               button.text(text);
+           } else {
+
+           }
+    }
+
+    function enterInitialState() {
+        displayQuestion();
+        displayMessage("Are you ready?");
+    }
+
+    function enterState(s) {
+    //s refers to the index of the state starting from 0 and excluding the initial state
+        if (states[s]) {
+            displayQuestion(states[s].question, states[s].choices);
+            displayMessage("", 0)
+        }
     }
 
     function enterFinalState() {
-
+        displayQuestion();
+        displayMessage("Quiz completed!", 2000);
     }
 
 });
