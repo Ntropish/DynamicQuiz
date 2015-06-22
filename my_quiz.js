@@ -123,6 +123,8 @@ $(document).ready( function() {
     }
 
     function enterInitialState() {
+        setAttrOrInvis($('#backward'));
+        setAttrOrInvis($('#forward'), 'value', 'continue?');
         displayQuestion();
         displayMessage("Are you ready?");
     }
@@ -140,7 +142,9 @@ $(document).ready( function() {
         displayMessage("Quiz completed!", 2000);
     }
 
-    /* INITIALIZATION */
+    //INITIALIZATION
     enterInitialState();
+
+
 
 });
