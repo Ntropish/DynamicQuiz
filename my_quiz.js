@@ -113,7 +113,7 @@ $(document).ready( function() {
         object is given the invisible class
          */
         if (attr) {
-            if ( !elt.hasClass('invisible')) {
+            if ( elt.hasClass('invisible')) {
                 elt.removeClass('invisible')
             }
             elt.attr(attr, val);
@@ -143,6 +143,11 @@ $(document).ready( function() {
             displayMessage("Final Question", 2000);
             setAttrOrInvis($('#backward'), 'value', 'Previous');
             setAttrOrInvis($('#forward'), 'value', 'Submit');
+            displayQuestion(states[s].question, states[s].choices);
+        } else {
+            setAttrOrInvis($('#backward'), 'value', 'Previous');
+            setAttrOrInvis($('#forward'), 'value', 'Next');
+            displayQuestion(states[s].question, states[s].choices);
         }
     }
 
@@ -157,6 +162,10 @@ $(document).ready( function() {
     $('#forward').on('click', function() {
         if (currentState === -1) {
             displayMessage("Good Luck!", 2000);
+            enterState(++currentState);
+        } else if (currentState === questions.length - 1) {
+            enterFinalState();
+        } else {
             enterState(++currentState);
         }
     });
