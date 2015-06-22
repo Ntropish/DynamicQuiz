@@ -133,7 +133,16 @@ $(document).ready( function() {
     //s refers to the index of the state starting from 0 and excluding the initial state
         if (states[s]) {
             displayQuestion(states[s].question, states[s].choices);
-            displayMessage("", 0)
+
+        }
+        if (s === 0) {
+            setAttrOrInvis($('#backward'));
+            setAttrOrInvis($('#forward'), 'value', 'Next');
+
+        } else if (s === states.length - 1) {
+            displayMessage("Final Question", 2000);
+            setAttrOrInvis($('#backward'), 'value', 'Previous');
+            setAttrOrInvis($('#forward'), 'value', 'Submit');
         }
     }
 
