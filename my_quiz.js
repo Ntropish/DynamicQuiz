@@ -18,7 +18,8 @@ function State(question, choices, correctAnswer) {
     State is designed this way, redundantly storing question data, so that
     it doesn't rely on the question list remaining static and the only way
     input questions. This way the question list is only needed at
-    initialization and questions from other sources can be used dynamically.
+    initialization, questions from other sources can be used dynamically,
+    and states can change positions.
 
     State does not represent the starting and ending states. These two
     special cases are to be dealt with individually
@@ -27,7 +28,7 @@ function State(question, choices, correctAnswer) {
     this.question = question;
     this.choices = choices;
     this.correctAnswer = correctAnswer;
-    this.userChoice = -1;
+    this.userChoice = -1; //-1 until the user presses the 'next' button with a choice selected
 }
 
 //state object list is created here
@@ -38,5 +39,17 @@ for (var q in questions) {
 
 $(document).ready( function() {
     'use strict';
+
+    function enterInitialState() {
+
+    }
+
+    function enterState() {
+
+    }
+
+    function enterFinalState() {
+
+    }
 
 });
