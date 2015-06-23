@@ -124,7 +124,7 @@ $(document).ready( function() {
 
     function enterInitialState() {
         setAttrOrInvis($('#backward'));
-        setAttrOrInvis($('#forward'), 'value', 'continue?');
+        setAttrOrInvis($('#forward'), 'value', 'Continue');
         displayQuestion();
         displayMessage("Are you ready?");
     }
