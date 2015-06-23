@@ -186,6 +186,15 @@ $(document).ready( function() {
             }
         }
     }
+
+    function isCompleteQuiz() {
+        for (var s in states) {
+            if (states.hasOwnProperty(s) && !states[s].userChoice) {
+                return false;
+            }
+        }
+        return true;
+    }
     //*******************************************************
     //INITIALIZATION AND EVENT HANDLING
     //*******************************************************
