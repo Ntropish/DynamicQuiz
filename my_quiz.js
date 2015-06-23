@@ -6,9 +6,9 @@
 // currentState initialized to -1, representing the special start state
 var currentState = -1;
 
-var questions = [   {question:"What is 3 + 3?", choices: ['5','6','7'], correctAnswer:2},
-    {question:"What is 3 + 4?", choices: ['5','6','7'], correctAnswer:3},
-    {question:"What is 3 + 2?", choices: ['5','6','7'], correctAnswer:1}];
+var questions = [   {question:"What is 3 + 3?", choices: ['5','6','7'], correctAnswer:1},
+    {question:"What is 3 + 4?", choices: ['5','6','7'], correctAnswer:2},
+    {question:"What is 3 + 2?", choices: ['5','6','7'], correctAnswer:0}];
 
 function State(question, choices, correctAnswer) {
     /*
@@ -133,6 +133,10 @@ $(document).ready( function() {
     //s refers to the index of the state starting from 0 and excluding the initial state
         if (states[s]) {
             displayQuestion(states[s].question, states[s].choices);
+            if (states[s].userChoice !== -1) {
+                console.log(states[s].userChoice);
+                $('#choices').find('> :eq(' + states[s].userChoice + ')').prop('checked', true);
+            }
         }
         //Handle button display for initial, last, general cases
         if (s === 0) {
@@ -156,6 +160,13 @@ $(document).ready( function() {
         setAttrOrInvis($('#forward'));
     }
 
+    function saveAnswer() {
+        var answer = +$('#choices').find('input:checked').attr('data-num');
+        if (answer) {
+            states[currentState].userChoice = answer;
+        }
+    }
+
     //INITIALIZATION
     enterInitialState();
 
@@ -163,9 +174,12 @@ $(document).ready( function() {
         if (currentState === -1) {
             displayMessage("Good Luck!", 2000);
             enterState(++currentState);
+
         } else if (currentState === questions.length - 1) {
+            saveAnswer();
             enterFinalState();
         } else {
+            saveAnswer();
             enterState(++currentState);
         }
     });
@@ -176,6 +190,7 @@ $(document).ready( function() {
         } else if (currentState === 0) { //Shouldn't happen again, don't change state if it does though
             enterState(currentState);
         } else { //Should be the only possible case
+            saveAnswer();
             enterState(--currentState);
         }
     });
