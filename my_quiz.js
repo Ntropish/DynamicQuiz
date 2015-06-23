@@ -62,7 +62,7 @@ $(document).ready( function() {
                 get the users answer
                 */
                 var listElt = $('<li>' + choices[i] + '</li>');
-                listElt.append($('<input type="radio" name="choice" data-num="' + i + '"/>'));
+                listElt.append($('<input type="radio" name="choice" data-num="' + i + '" />'));
                 choicesElt.append(listElt);
             }
         }
@@ -133,9 +133,8 @@ $(document).ready( function() {
     //s refers to the index of the state starting from 0 and excluding the initial state
         if (states[s]) {
             displayQuestion(states[s].question, states[s].choices);
-            if (states[s].userChoice !== -1) {
-                console.log(states[s].userChoice);
-                $('#choices').find('> :eq(' + states[s].userChoice + ')').prop('checked', true);
+            if (states[s].userChoice !== -1) { //check for stored answer and set it to checked
+                $('#choices').find('li').eq(states[s].userChoice).find('>').prop('checked', true);
             }
         }
         //Handle button display for initial, last, general cases
@@ -162,7 +161,8 @@ $(document).ready( function() {
 
     function saveAnswer() {
         var answer = +$('#choices').find('input:checked').attr('data-num');
-        if (answer) {
+        if (answer >= 0) {
+            console.log("set");
             states[currentState].userChoice = answer;
         }
     }
