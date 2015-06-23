@@ -169,6 +169,15 @@ $(document).ready( function() {
         }
     }
 
+    function getScore() {
+        var score = 0;
+        for (var s in states) {
+            if (states[s].userChoice === states[s].correctAnswer) {
+                score++;
+            }
+        }
+    }
+
     //INITIALIZATION
     enterInitialState();
 
