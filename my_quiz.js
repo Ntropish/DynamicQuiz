@@ -36,7 +36,7 @@ function State(question, choices, correctAnswer) {
 var states = [];
 questions.forEach(function (q) {
     'use strict';
-    states.push(new State(questions[q].question, questions[q].choices, questions[q].correctAnswer));
+    states.push(new State(q.question, q.choices, q.correctAnswer));
 });
 
 $(document).ready( function() {
