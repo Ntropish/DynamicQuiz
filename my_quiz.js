@@ -198,6 +198,7 @@ $(document).ready( function() {
                 score++;
             }
         }
+        return score;
     }
 
     function getUnansweredQuestions() { //returns unanswered questions in a list
