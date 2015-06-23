@@ -128,6 +128,14 @@ $(document).ready( function() {
             elt.addClass('invisible');
         }
     }
+
+    function setSubHeading(text) {
+        if (text) {
+            $('#sub-heading').text(text);
+        } else {
+            $('#sub-heading').text('');
+        }
+    }
     //*******************************************************
     //STATE FUNCTIONS, REALIZE STATES BY MANIPULATING THE DOM
     //*******************************************************
@@ -203,11 +211,13 @@ $(document).ready( function() {
     enterInitialState();
 
     $('#forward').on('click', function() {
+
+        //Initial state handling
         if (currentState === -1) {
             displayMessage("Good Luck!", 2000);
             enterState(++currentState);
 
-        } else if (currentState === questions.length - 1) {
+        } else if (currentState === questions.length - 1) { //final question handling
             saveAnswer();
             //can this list ever actually be empty? (I make small joke)
             var unansweredQuestions = getUnansweredQuestions();
@@ -220,7 +230,8 @@ $(document).ready( function() {
                 });
                 displayMessage(message, 2000);
             }
-        } else {
+
+        } else { //general state handling
             saveAnswer();
             enterState(++currentState);
         }
