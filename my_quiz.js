@@ -175,6 +175,10 @@ $(document).ready( function() {
         setAttrOrInvis($('#backward'));
         setAttrOrInvis($('#forward'));
         var score = getScore();
+        setSubHeading(  (score===0)?"You got no questions correct! Awesome...":
+                        (score===1)?"You got one right! Cool man.":
+                                    "You got "+score+" questions right!"
+        );
     }
 
     //*******************************************************
