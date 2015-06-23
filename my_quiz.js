@@ -95,11 +95,9 @@ $(document).ready( function() {
             elt.removeClass('invisible');
         }
         //make sure no old timeouts are active
-        for (var messageTimeout in messageTimeouts) {
-            if (messageTimeout.hasOwnProperty(messageTimeout)) {
-                clearTimeout(messageTimeouts[messageTimeout]);
-            }
-        }
+        messageTimeouts.forEach( function(t) {
+            clearTimeout(t);
+        });
 
         if (time) {
             messageTimeouts.push(setTimeout( function() {
