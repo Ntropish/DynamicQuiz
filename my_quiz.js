@@ -11,6 +11,7 @@ var questions = [   {question:"What is 3 + 3?", choices: ['5','6','7'], correctA
     {question:"What is 3 + 2?", choices: ['5','6','7'], correctAnswer:0}];
 
 function State(question, choices, correctAnswer) {
+    'use strict';
     /*
     State stores all question data and is intended to store properties
     of the state such as the user's answer to a question.
@@ -33,9 +34,10 @@ function State(question, choices, correctAnswer) {
 
 //state object list is created here
 var states = [];
-for (var q in questions) {
+questions.forEach(function (q) {
+    'use strict';
     states.push(new State(questions[q].question, questions[q].choices, questions[q].correctAnswer));
-}
+});
 
 $(document).ready( function() {
     'use strict';
@@ -49,8 +51,6 @@ $(document).ready( function() {
         textElt.empty();
         if (questionText) {
             textElt.text(questionText);
-        } else {
-
         }
         //Empty #choices and fill with new ones if given
         choicesElt.empty();
@@ -91,7 +91,9 @@ $(document).ready( function() {
         }
         //make sure no old timeouts are active
         for (var messageTimeout in messageTimeouts) {
-            clearTimeout(messageTimeouts[messageTimeout]);
+            if (messageTimeout.hasOwnProperty(messageTimeout)) {
+                clearTimeout(messageTimeouts[messageTimeout]);
+            }
         }
 
         if (time) {
@@ -114,11 +116,11 @@ $(document).ready( function() {
          */
         if (attr) {
             if ( elt.hasClass('invisible')) {
-                elt.removeClass('invisible')
+                elt.removeClass('invisible');
             }
             elt.attr(attr, val);
         } else if ( !elt.hasClass('invisible')) {
-            elt.addClass('invisible')
+            elt.addClass('invisible');
         }
     }
 
@@ -157,12 +159,12 @@ $(document).ready( function() {
         displayMessage("Quiz completed!", 2000);
         setAttrOrInvis($('#backward'));
         setAttrOrInvis($('#forward'));
+
     }
 
     function saveAnswer() {
         var answer = +$('#choices').find('input:checked').attr('data-num');
         if (answer >= 0) {
-            console.log("set");
             states[currentState].userChoice = answer;
         }
     }
