@@ -57,6 +57,7 @@ h1 {
 }
 
 .invisible {
+    pointer-events: none;
     transition: .2s;
     opacity: 0;
     display: block;
