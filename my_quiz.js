@@ -42,7 +42,12 @@ questions.forEach(function (q) {
 $(document).ready( function() {
     'use strict';
 
+    //*******************************************************
+    //DOM MANIPULATION FUNCTIONS
+    //*******************************************************
+
     //holds message timeout returns so they can be cancelled if new messages are displayed
+    //This is used in displayMessage function
     //NOOB QUESTION: IS THIS THE BEST SCOPE FOR THIS?
     var messageTimeouts = [];
     function displayQuestion(questionText, choices) {
@@ -123,7 +128,9 @@ $(document).ready( function() {
             elt.addClass('invisible');
         }
     }
-
+    //*******************************************************
+    //STATE FUNCTIONS, REALIZE STATES BY MANIPULATING THE DOM
+    //*******************************************************
     function enterInitialState() {
         setAttrOrInvis($('#backward'));
         setAttrOrInvis($('#forward'), 'value', 'Continue');
@@ -161,7 +168,9 @@ $(document).ready( function() {
         setAttrOrInvis($('#forward'));
 
     }
-
+    //*******************************************************
+    //OUTER UTILITIES, INSPECTION AND STATE MANIPULATION
+    //*******************************************************
     function saveAnswer() {
         var answer = +$('#choices').find('input:checked').attr('data-num');
         if (answer >= 0) {
@@ -177,8 +186,9 @@ $(document).ready( function() {
             }
         }
     }
-
-    //INITIALIZATION
+    //*******************************************************
+    //INITIALIZATION AND EVENT HANDLING
+    //*******************************************************
     enterInitialState();
 
     $('#forward').on('click', function() {
