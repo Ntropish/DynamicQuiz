@@ -166,8 +166,9 @@ $(document).ready( function() {
         displayMessage("Quiz completed!", 2000);
         setAttrOrInvis($('#backward'));
         setAttrOrInvis($('#forward'));
-
+        var score = getScore();
     }
+
     //*******************************************************
     //OUTER UTILITIES, INSPECTION AND STATE MANIPULATION
     //*******************************************************
@@ -178,7 +179,7 @@ $(document).ready( function() {
         }
     }
 
-    function getScore() {
+    function getScore() { //Get user's correct answer number
         var score = 0;
         for (var s in states) {
             if (states[s].userChoice === states[s].correctAnswer) {
@@ -187,13 +188,14 @@ $(document).ready( function() {
         }
     }
 
-    function isCompleteQuiz() {
+    function getUnansweredQuestions() { //returns unanswered questions in a list
+        var results = [];
         for (var s in states) {
-            if (states.hasOwnProperty(s) && !states[s].userChoice) {
-                return false;
+            if (states.hasOwnProperty(s) && states[s].userChoice === -1) {
+                results.push(s);
             }
         }
-        return true;
+        return results;
     }
     //*******************************************************
     //INITIALIZATION AND EVENT HANDLING
@@ -207,7 +209,17 @@ $(document).ready( function() {
 
         } else if (currentState === questions.length - 1) {
             saveAnswer();
-            enterFinalState();
+            //can this list ever actually be empty? (I make small joke)
+            var unansweredQuestions = getUnansweredQuestions();
+            if (unansweredQuestions.length === 0) {
+                enterFinalState();
+            } else {
+                var message = unansweredQuestions.length === 1?"This question still need answering: ":"These questions still need answering: ";
+                unansweredQuestions.forEach( function(q) {
+                   message += +q+1 + ' ';
+                });
+                displayMessage(message, 2000);
+            }
         } else {
             saveAnswer();
             enterState(++currentState);
